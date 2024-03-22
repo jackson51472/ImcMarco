@@ -2,16 +2,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PessoaTest {
-
     Pessoa pessoa;
-
     @BeforeEach
     void setUp() {
         pessoa = new Pessoa();
     }
-
     @Test
     void deveRetornarHomemAbaixoPeso() {
         pessoa.setSexo("Masculino");
@@ -19,7 +17,6 @@ class PessoaTest {
         pessoa.setPeso(20.6f);
         assertEquals("abaixo do peso", pessoa.verificarSaude());
     }
-
     @Test
     void deveRetornarHomemPesoNormal() {
         pessoa.setSexo("Masculino");
@@ -89,5 +86,30 @@ class PessoaTest {
         pessoa.setAltura(1.0f);
         pessoa.setPeso(32.4f);
         assertEquals("Sexo invalido", pessoa.verificarSaude());
+    }
+    @Test
+    void deveRetornarPessoaCrianca(){
+        pessoa.setIdade(11);
+        assertEquals("Criança",pessoa.verificarVelhice());
+    }
+    @Test
+    void deveRetornarPessoaAdolecente(){
+        pessoa.setIdade(17);
+        assertEquals("Adolescente",pessoa.verificarVelhice());
+    }
+    @Test
+    void deveRetornarPessoaAdulta(){
+        pessoa.setIdade(39);
+        assertEquals("Adulto",pessoa.verificarVelhice());
+    }
+    @Test
+    void deveRetornarPessoaSenhor(){
+        pessoa.setIdade(59);
+        assertEquals("Senhor",pessoa.verificarVelhice());
+    }
+    @Test
+    void deveRetornarPessoaIdoso(){
+        pessoa.setIdade(60);
+        assertEquals("Idoso",pessoa.verificarVelhice());
     }
 }

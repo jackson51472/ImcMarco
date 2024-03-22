@@ -1,11 +1,18 @@
 public class Pessoa {
 
     private double peso;
-
-
     private double altura;
     private double imc;
     private String sexo;
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    private Integer idade;
 
     public double getPeso() {
         return peso;
@@ -46,7 +53,22 @@ public class Pessoa {
 
     }
 
-    public  String verificarSaude(){
+    public String verificarVelhice(){
+        if (this.idade < 12){
+            return "Criança";
+        } else if (this.idade < 18) {
+            return "Adolescente";
+        } else if (this.idade < 40) {
+            return "Adulto";
+        } else if (this.idade < 60) {
+            return "Senhor";
+        } else {
+            return "Idoso";
+        }
+
+    }
+
+    public String verificarSaude(){
         calculaIMC();
     if (this.sexo.equals("Masculino")){
         if (this.imc < 20.7 ){
@@ -82,5 +104,6 @@ public class Pessoa {
 
         return "Sexo invalido";
     }
+
 
 }
