@@ -2,7 +2,7 @@ public class Pessoa {
 
     private double peso;
     private double altura;
-    private double imc;
+
     private String sexo;
     public Integer getIdade() {
         return idade;
@@ -30,14 +30,6 @@ public class Pessoa {
         this.altura = altura;
     }
 
-    public double getImc() {
-        return imc;
-    }
-
-    public void setImc(double imc) {
-        this.imc = imc;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -47,9 +39,9 @@ public class Pessoa {
     }
 
 
-    public void calculaIMC(){
+    public double calculaIMC(){
 
-        this.imc = peso / (Math.pow(altura, 2));
+        return peso / (Math.pow(altura, 2));
 
     }
 
@@ -69,40 +61,48 @@ public class Pessoa {
     }
 
     public String verificarSaude(){
-        calculaIMC();
+        if(this.sexo == null || !this.sexo.equals("Masculino") && !this.sexo.equals("Feminino")){
+            throw new NullPointerException("Sexo Invalido");
+        }
+        if (this.peso == 0.0f){
+            throw new IllegalArgumentException("Peso não digitado!!!");
+        }
+        if (this.altura == 0.0f){
+            throw new IllegalArgumentException("Altura não digitada!!!");
+        }
+        double imc = calculaIMC();
+
     if (this.sexo.equals("Masculino")){
-        if (this.imc < 20.7 ){
+        if (imc < 20.7 ){
             return "abaixo do peso";
         }
-        else if (this.imc < 26.4) {
+        else if (imc < 26.4) {
             return "no peso normal";
         }
-        else if (this.imc < 27.8) {
+        else if (imc < 27.8) {
             return "marginalmente acima do peso";
         }
-        else if (this.imc < 31.1) {
+        else if (imc < 31.1) {
             return "acima do peso ideal";
         }
         else return "Obeso";
     }
     else if (this.sexo.equals("Feminino")) {
-        if (this.imc < 19.1 ){
+        if (imc < 19.1 ){
             return "abaixo do peso";
         }
-        else if (this.imc < 25.8) {
+        else if (imc < 25.8) {
             return "no peso normal";
         }
-        else if (this.imc < 27.3) {
+        else if (imc < 27.3) {
             return "marginalmente acima do peso";
         }
-        else if (this.imc < 32.3) {
+        else if (imc < 32.3) {
             return "acima do peso ideal";
         }
         else return "Obeso";
     }
-
-
-        return "Sexo invalido";
+    return null;
     }
 
 

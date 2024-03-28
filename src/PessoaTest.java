@@ -82,11 +82,55 @@ class PessoaTest {
     }
     @Test
     void deveRetornarSexoInvalido() {
-        pessoa.setSexo("Masculin");
-        pessoa.setAltura(1.0f);
-        pessoa.setPeso(32.4f);
-        assertEquals("Sexo invalido", pessoa.verificarSaude());
+        try {
+            pessoa.setSexo("gg");
+            pessoa.verificarSaude();
+            fail();
+        }
+        catch (NullPointerException e){
+            assertEquals("Sexo Invalido", e.getMessage());
+        }
     }
+
+    @Test
+    void deveRetornarPesoNaoDigitado(){
+        try {
+            pessoa.setSexo("Masculino");
+            pessoa.verificarSaude();
+            fail();
+        }
+        catch (IllegalArgumentException e){
+            assertEquals("Peso não digitado!!!", e.getMessage());
+        }
+    }
+    @Test
+    void deveRetornarAlturaNaoDigitada(){
+        try {
+            pessoa.setSexo("Masculino");
+            pessoa.setPeso(27.7f);
+            pessoa.verificarSaude();
+            fail();
+        }
+        catch (IllegalArgumentException e){
+            assertEquals("Altura não digitada!!!", e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Test
     void deveRetornarPessoaCrianca(){
         pessoa.setIdade(11);
@@ -112,4 +156,6 @@ class PessoaTest {
         pessoa.setIdade(60);
         assertEquals("Idoso",pessoa.verificarVelhice());
     }
+
+
 }
